@@ -1,0 +1,105 @@
+<!doctype HTML>
+<html>
+    <head>
+        <title> Title </title>
+
+        <style>
+            img{
+                width:200px
+            }
+            body{
+                background-color:forestgreen;
+            }
+        </style>
+
+        <script>
+            var pr1=15, Wprice1=6;
+            var pr2=15, Wprice2=4;
+            var pr3=15, Wprice3=8;
+            function initPrices(){
+                document.getElementById("span1").innerHTML="Price: $"+pr1;
+                document.getElementById("span2").innerHTML="Price: $"+pr2;
+                document.getElementById("span3").innerHTML="Price: $"+pr3;
+            }
+            function ProcessOrder(){
+                var q1= parseInt(document.getElementById("q1").value);
+                var q2= parseInt(document.getElementById("q2").value);
+                var q3= parseInt(document.getElementById("q3").value);
+                var Customer_Subtotal= (pr1*q1)+(pr2*q2)+(pr3*q3);
+                var Company_Subtotal= (Wprice1*q1)+(Wprice2*q2)+(Wprice3*q3);
+                var profit= Customer_Subtotal-Company_Subtotal;
+                var TiS= q1+q2+q3;
+                var taxRate= .0875;
+                var tax= Customer_Subtotal*taxRate;
+                if (Customer_Subtotal<100){
+                    var shipping=25;
+                }else if (Customer_Subtotal>100 && Customer_Subtotal<=200){
+                    var shipping=10;
+                }else{
+                    var shipping=0;
+                }
+                var total= Customer_Subtotal+shipping;
+                var op= document.getElementById("output");
+                var op2= document.getElementById("output2");
+                var build1="";
+                build1+="<br>";
+                build1+="CUSTOMER INFO";
+                build1+="<br>-----------------------------------<br>";
+                build1+="Subtotal: $"+Customer_Subtotal;
+                build1+="<br>";
+                build1+="Tax: $"+tax;
+                build1+="<br>";
+                build1+="Shipping: $"+shipping;
+                build1+="<br>";
+                build1+="Total: $"+total;
+                var build="";
+                build+="<br>";
+                build+="COMPANY INFO";
+                build+="<br>------------------------------------<br>";
+                build+="Customer Subtotal: $"+Customer_Subtotal;
+                build+="<br>";
+                build+="Company Subtotal: $"+Company_Subtotal;
+                build+="<br>";
+                build+="Profit: $"+profit;
+                build+="<br>";
+                build+="Total Items Sold: "+TiS;
+                op.innerHTML=build1;
+                op2.innerHTML=build;
+                
+            }
+        </script>
+    
+
+    </head>
+
+    <body onload="initPrices()">
+         <h1>Darron's Game Store</h1>
+         <!--Item 1-->
+         <div>
+             <img src="COD.jpg"><br>
+             <p>A First Person Shooter Game</p>
+             <span id="span1"></span>
+             <input type="text" id="q1" placeholder = "Enter # of Quantities">
+         </div>
+         <!--Item 2-->
+         <div>
+             <img src="GTA.jpg"><br>
+             <p>A Open World Game</p>
+             <span id="span2"></span2>
+             <input type="text" id="q1" placeholder = "Enter # of Quantities">
+         </div>
+         <!--Item 3-->
+         <div>
+             <img src="NFS.jpg"><br>
+             <p>A Open World Racing Game</p>
+             <span id="span3"></span3>
+             <input type="text" id="q1" placeholder = "Enter # of Quantities">
+         </div>
+         
+         <div id="output"> </div>
+         <div id="output2"></div>   
+         
+         <button onclick = "ProcessOrder()" > Process Order </button>
+    </body>
+
+</html>
